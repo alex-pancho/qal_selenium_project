@@ -1,4 +1,4 @@
-from pages.elements import WebElement
+from elements import WebElement
 
 
 class BasePage:
@@ -8,7 +8,7 @@ class BasePage:
         self.driver = driver
 
     def item(self, name: str) -> WebElement:
-        _xpath = self.locators.get(name)
+        _xpath = self.__getattribute__(name)
         msg = f"{self.__class__.__name__} has no xpath " + \
               f"for element: {name}, " + \
               f"may be typo? Exsist names is: {self.locators.keys()}"
