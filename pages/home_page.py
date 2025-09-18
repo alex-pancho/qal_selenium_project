@@ -1,4 +1,4 @@
-from base_page import BasePage
+from pages.base_page import BasePage
 
 
 class HomePage(BasePage):
@@ -6,7 +6,7 @@ class HomePage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
     
-    menu_home = '//a[text()="Home"]'
+    menu_home = '//ul[@class="nav navbar-nav"]'
     sign_in_button = '//button[.="Sign In"]'
     contacts_head = '//h2'
     sign_up_button = '//button[.="Sign Up"]'

@@ -1,4 +1,4 @@
-from elements import WebElement
+from pages.elements import WebElement
 
 
 class BasePage:
