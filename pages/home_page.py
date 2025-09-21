@@ -14,8 +14,9 @@ class HomePage(BasePage):
     password_by = '//*[@id="signinPassword"]'
     signin_by = '//form//div[.="Login"]'
 
+
 if __name__ == "__main__":
     driver = ""
     my_home = HomePage(driver)
-    item = my_home.item("menu_home")
+    item = my_home.item.menu_home
     print(item)
