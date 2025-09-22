@@ -19,14 +19,10 @@ class WebElement():
         self._timeout = timeout
         self._wait_after_click = wait_after_click
 
-        if 'driver' in kwargs:
-            self._web_driver = kwargs['driver']
-
-        for by, locate in kwargs.items():
-            if by == 'xpath':
-                self._locator = (By.XPATH, locate)
-            elif by == 'css':
-                self._locator = (By.CSS_SELECTOR, locate)
+        self._web_driver = kwargs.get('driver')
+        self._locator = (By.XPATH, kwargs.get('xpath'))
+        # if "css" in  kwargs:
+        #     self._locator = (By.CSS_SELECTOR, kwargs['css'])
     
     def find(self, timeout=10):
         """ Find element on the page. """
