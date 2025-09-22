@@ -1,6 +1,7 @@
 from pages.elements import WebElement
 
 
+
 class ItemProxy:
     def __init__(self, page):
         self.page = page
@@ -39,6 +40,7 @@ class PageMeta(type):
 
 class BasePage(metaclass=PageMeta):
     locators: dict[str, str] = {}
+    URL = "https://automationexercise.com"
 
     def __init__(self, driver):
         self.driver = driver
