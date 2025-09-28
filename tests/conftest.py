@@ -1,11 +1,15 @@
 import pytest
-
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+import time
 
 from pages.home_page import HomePage
 from pages.signup_in_page import SignupPage
+from pages.login_page import LoginPage
 
 def firefox(debug=False):
     options = FirefoxOptions()
@@ -24,7 +28,7 @@ def chrome(debug=False):
     return driver
 
 
-@pytest.fixture(scope="module")
+@pytest.fixture(scope="function")
 def driver():
     _driver = chrome(True)
     _driver.maximize_window()
@@ -40,3 +44,22 @@ def home_page(driver):
 def signup_page(driver):
     driver.get(HomePage.URL + "/login")
     return SignupPage(driver)
+
+@pytest.fixture
+def login_page(driver):
+    driver.get(HomePage.URL + "/login")
+    time.sleep(5)
+    return LoginPage(driver)
+    
+
+
+@pytest.fixture(autouse=True)
+def close_cookies_popup(driver):
+    consent_xpath = "//button[@aria-label='Consent']"
+    accept_button = WebDriverWait(driver, 5).until(
+        EC.element_to_be_clickable((By.XPATH, consent_xpath))
+    )
+    print(f"Found button: {accept_button}")
+    accept_button.click()
+    time.sleep(2)
+      
