@@ -12,7 +12,7 @@ class LoginPage(BasePage):
         input_password_locator = "//input[@data-qa='login-password']"
         login_button_locator =  "//button[@data-qa='login-button']"
         error_message_locator = "//p[text()='Your email or password is incorrect!']"
-        self.logout_button_locator = (By.XPATH, "//a[contains(text(), 'Logout')]")
+        logout_button_locator = "//a[contains(text(), 'Logout')]"
     
     def enter_email(self, email):
         email_field = self.item.input_email_locator
