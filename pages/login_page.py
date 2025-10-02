@@ -15,11 +15,8 @@ class LoginPage(BasePage):
         self.logout_button_locator = (By.XPATH, "//a[contains(text(), 'Logout')]")
     
     def enter_email(self, email):
-        email_field = WebDriverWait(self.driver, 6).until(
-            EC.element_to_be_clickable(self.input_email_locator)
-        )
-        email_field.clear()
-        email_field.send_keys(email)
+        email_field = self.item.input_email_locator
+        email_field.input_text(email)
 
     def enter_password(self, password):
         password_field = WebDriverWait(self.driver, 6).until(
