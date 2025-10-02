@@ -18,7 +18,7 @@ class SignupPage(BasePage):
     # error_message  = '//*[text()="Your email or password is incorrect!"]'
     # error_message = '//p[contains(text(), "Your email or password is incorrect")]'
     # error_message = '//form[@action="/login"]//p[contains(normalize-space(.), "Your email or password is incorrect!")]'
-    # error_message = '//p[contains(normalize-space(.), "Your email or password is incorrect")]'
+    error_message = "//div[@class='login-form']//p[text()='Your email or password is incorrect!']"
     
     img_src = '//img[@alt="Website for automation practice"]'
     home = '//a[text()=" Home"]'
