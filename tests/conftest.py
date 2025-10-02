@@ -28,7 +28,7 @@ def chrome(debug=False):
     return driver
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture()
 def driver():
     _driver = chrome(True)
     _driver.maximize_window()
