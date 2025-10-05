@@ -51,15 +51,12 @@ def login_page(driver):
     time.sleep(5)
     return LoginPage(driver)
     
-
-
 @pytest.fixture(autouse=True)
 def close_cookies_popup(driver):
-    consent_xpath = "//button[@aria-label='Consent']"
-    accept_button = WebDriverWait(driver, 5).until(
-        EC.element_to_be_clickable((By.XPATH, consent_xpath))
-    )
-    print(f"Found button: {accept_button}")
-    accept_button.click()
-    time.sleep(2)
+    try:
+        button = driver.find_element(By.XPATH, "//button[@aria-label='Consent']")
+        if button.is_displayed() and button.is_enabled():
+            button.click()
+    except Exception:
+        pass
       
