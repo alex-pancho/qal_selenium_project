@@ -13,40 +13,26 @@ class LoginPage(BasePage):
         login_button_locator =  "//button[@data-qa='login-button']"
         error_message_locator = "//p[text()='Your email or password is incorrect!']"
         logout_button_locator = "//a[contains(text(), 'Logout')]"
+        
+    login_page_url = BasePage.URL + "/login"
     
     def enter_email(self, email):
         email_field = self.item.input_email_locator
         email_field.input_text(email)
 
     def enter_password(self, password):
-        password_field = WebDriverWait(self.driver, 6).until(
-            EC.element_to_be_clickable(self.input_password_locator)
-        )
-        password_field.clear()
-        password_field.send_keys(password)
+        password_field = self.item.input_password_locator
+        password_field.input_text(password)
 
     def click_login(self):
-        WebDriverWait(self.driver, 6).until(
-            EC.element_to_be_clickable(self.login_button_locator)
-        ).click()
+        self.item.login_button_locator.click()
 
     def is_error_message_presented(self):
-        try:
-            WebDriverWait(self.driver, 5).until(
-                EC.visibility_of_element_located(self.error_message_locator)
-            )
-            return True
-        except:
-            return False
+        return self.item.error_message_locator.is_displayed()
 
     def is_still_on_login_page(self):
-        return self.driver.current_url == "https://automationexercise.com/login"
-    
+        return self.driver.current_url == self.login_page_url
+
     def is_logout_button_presented(self):
-        try:
-            WebDriverWait(self.driver, 5).until(
-            EC.visibility_of_element_located(self.logout_button_locator)
-            )
-            return True
-        except:
-            return False
+        return self.item.logout_button_locator.is_displayed()
+    
