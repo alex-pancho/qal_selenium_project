@@ -40,17 +40,20 @@ def driver():
 def home_page(driver):
     return HomePage(driver)
 
+
 @pytest.fixture
 def signup_page(driver):
     driver.get(HomePage.URL + "/login")
     return SignupPage(driver)
+
 
 @pytest.fixture
 def login_page(driver):
     driver.get(HomePage.URL + "/login")
     time.sleep(5)
     return LoginPage(driver)
-    
+
+
 @pytest.fixture(autouse=True)
 def close_cookies_popup(driver):
     try:
