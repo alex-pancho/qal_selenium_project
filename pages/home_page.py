@@ -13,8 +13,7 @@ class HomePage(BasePage):
     username_by = '//[@name="email"]'
     password_by = '//*[@id="signinPassword"]'
     signin_by = '//form//div[.="Login"]'
-
-
+    element_stylish_dress_item = '//a[@href="/product_details/4"]'
 if __name__ == "__main__":
     driver = ""
     my_home = HomePage(driver)
