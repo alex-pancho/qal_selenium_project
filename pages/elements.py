@@ -1,5 +1,5 @@
 import time
-from selenium.common import exceptions as EXCEPT
+from selenium.common.exceptions import WebDriverException, JavascriptException
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
@@ -33,7 +33,7 @@ class WebElement():
             element = WebDriverWait(self._web_driver, timeout).until(
                EC.presence_of_element_located(self._locator)
             )
-        except (EXCEPT.WebDriverException, EXCEPT.JavascriptException):
+        except (WebDriverException, JavascriptException):
             print(('Element not found on the page!', 'red'))
 
         return element

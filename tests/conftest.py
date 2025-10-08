@@ -9,6 +9,8 @@ import time
 
 from pages.home_page import HomePage
 from pages.signup_in_page import SignupPage
+from pages.cart_page import CartPage
+from pages.item4_page import Item4_Page
 from pages.login_page import LoginPage
 
 def firefox(debug=False):
@@ -23,6 +25,8 @@ def firefox(debug=False):
 def chrome(debug=False):
     options = ChromeOptions()
     options.add_argument('--headless=new')
+    options.add_experimental_option('useAutomationExtension', False)
+    options.add_experimental_option("excludeSwitches", ['enable-automation'])
     driver = webdriver.Chrome() if debug else \
         webdriver.Chrome(options)
     return driver
@@ -30,7 +34,7 @@ def chrome(debug=False):
 
 @pytest.fixture()
 def driver():
-    _driver = chrome(True)
+    _driver = firefox(True)
     _driver.maximize_window()
     _driver.get(HomePage.URL)
     yield _driver
@@ -46,6 +50,15 @@ def signup_page(driver):
     driver.get(HomePage.URL + "/login")
     return SignupPage(driver)
 
+@pytest.fixture
+def item4_page(driver):
+    driver.get(HomePage.URL + "/product_details/4")
+    return Item4_Page(driver)
+    
+@pytest.fixture
+def cart_page(driver):
+    driver.get(HomePage.URL + "/view_cart")
+    return CartPage(driver)
 
 @pytest.fixture
 def login_page(driver):
