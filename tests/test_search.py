@@ -6,7 +6,7 @@ import time
 
 
 def visible_product_titles(driver):
-    """Вернуть список видимых (displayed) названий продуктов на странице."""
+    """Повернути список видимих назв на сторінці"""
     elems = driver.find_elements(By.CSS_SELECTOR, ".productinfo p")
     titles = [e.text.strip() for e in elems if e.is_displayed() and e.text.strip()]
     return titles
@@ -17,7 +17,7 @@ def test_search_product(driver):
     driver.get("http://automationexercise.com")
     time.sleep(2)
 
-    # Закрываем cookie-оверлей, если есть
+    # Закриваєм cookie-оверлей, якщо є
     try:
         agree_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//p[text()="Соглашаюсь"]'))
@@ -35,9 +35,9 @@ def test_search_product(driver):
     time.sleep(2)
 
     expected_url = "https://automationexercise.com/products"
-    assert driver.current_url == expected_url, f"Очикували URL {expected_url}, получили {driver.current_url}"
+    assert driver.current_url == expected_url, f"Очікували URL {expected_url}, получили {driver.current_url}"
 
-    # Поиск "Top"
+    # Пошук по слову "Top"
     search_input = driver.find_element(By.ID, "search_product")
     search_input.clear()
     search_input.send_keys("Top")
@@ -45,26 +45,26 @@ def test_search_product(driver):
     search_button = driver.find_element(By.ID, "submit_search")
     search_button.click()
 
-    # Дождаться, что появится секция Searched Products (поиск выполнен)
+    # Дочекатися що з'явиться Searched Products
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//h2[text()='Searched Products']"))
     )
     time.sleep(1)
 
     titles = visible_product_titles(driver)
-    assert len(titles) > 0, "Не найдены видимые продукты после поиска 'Top'"
+    assert len(titles) > 0, "Не найдені продукти після пощуку 'Top'"
 
-    # Проверяем — есть хотя бы один видимый продукт, содержащий 'Top' (регистронезависимо)
-    assert any("top" in t.lower() for t in titles), "Нет ни одного видимого продукта, содержащего 'Top'"
+    # Перевіряємо що є хоча б один продукт 'Top'
+    assert any("top" in t.lower() for t in titles), "Немає жодного продукту  'Top'"
 
 
 @pytest.mark.usefixtures("driver")
 def test_search_no_results(driver):
-    """Негативный тест: вводим 'Слон' и ожидаем отсутствие видимых совпадений."""
+    """Негативний тест: вводим 'Слон' и очикуємо відсутність збігів."""
     driver.get("http://automationexercise.com")
     time.sleep(2)
 
-    # Закрываем cookie-оверлей, если есть
+    # Закриваємо cookie-оверлей, якщо є
     try:
         agree_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.XPATH, '//p[text()="Соглашаюсь"]'))
@@ -82,9 +82,9 @@ def test_search_no_results(driver):
     time.sleep(2)
 
     expected_url = "https://automationexercise.com/products"
-    assert driver.current_url == expected_url, f"Очикували URL {expected_url}, получили {driver.current_url}"
+    assert driver.current_url == expected_url, f"Очікували URL {expected_url}, получили {driver.current_url}"
 
-    # Поиск "Слон"
+    # Пошук по слову "Слон"
     search_input = driver.find_element(By.ID, "search_product")
     search_input.clear()
     search_input.send_keys("Слон")
@@ -92,7 +92,7 @@ def test_search_no_results(driver):
     search_button = driver.find_element(By.ID, "submit_search")
     search_button.click()
 
-    # Дождаться секции результатов поиска (чтобы точно знать, что поиск отработал)
+    # Дочекатись секціі результатов пошуку (пошук відпрацював)
     WebDriverWait(driver, 10).until(
         EC.presence_of_element_located((By.XPATH, "//h2[text()='Searched Products']"))
     )
@@ -100,6 +100,6 @@ def test_search_no_results(driver):
 
     titles = visible_product_titles(driver)
 
-    # Утверждаем, что НЕТ видимых названий, содержащих "слон" (регистронезависимо)
+    # Намає продуктів "слон"
     assert not any("слон" in t.lower() for t in titles), \
-        f"Нашлись видимые продукты содержащие 'Слон' — { [t for t in titles if 'слон' in t.lower()] }"
+        f"Найдені продукти що содержать 'Слон' — { [t for t in titles if 'слон' in t.lower()] }"
