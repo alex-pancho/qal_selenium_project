@@ -8,21 +8,21 @@ class LoginPage(BasePage):
         super().__init__(driver)
         self.driver = driver
         
-        input_email_locator ="//input[@data-qa='login-email']"
-        input_password_locator = "//input[@data-qa='login-password']"
-        login_button_locator =  "//button[@data-qa='login-button']"
-        error_message_locator = "//p[text()='Your email or password is incorrect!']"
-        logout_button_locator = "//a[contains(text(), 'Logout')]"
+    input_email_locator ="//input[@data-qa='login-email']"
+    input_password_locator = "//input[@data-qa='login-password']"
+    login_button_locator =  "//button[@data-qa='login-button']"
+    error_message_locator = "//p[text()='Your email or password is incorrect!']"
+    logout_button_locator = "//a[contains(text(), 'Logout')]"
         
     login_page_url = BasePage.URL + "/login"
     
     def enter_email(self, email):
         email_field = self.item.input_email_locator
-        email_field.input_text(email)
+        email_field.send_keys(email)
 
     def enter_password(self, password):
         password_field = self.item.input_password_locator
-        password_field.input_text(password)
+        password_field.send_keys(password)
 
     def click_login(self):
         self.item.login_button_locator.click()

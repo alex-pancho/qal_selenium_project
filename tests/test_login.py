@@ -1,7 +1,7 @@
 import pytest
 from pages.login_page import LoginPage
     
-def test_login_data_incorrect(close_cookies_popup, login_page):
+def test_login_data_incorrect(login_page):
     login_page.enter_email("test@1secmail.com")
     login_page.enter_password("wrongpassword")
     login_page.click_login()
