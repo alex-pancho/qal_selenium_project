@@ -7,7 +7,7 @@ class SignupPage(BasePage):
         super().__init__(driver)
     
     input_name = '//input[@data-qa="signup-name"]'
-    input_email = '//input[@data-qa="signup-email"]'
+    input_email = '//*[@id="form"]/div/div/div[3]/div/form/input[3]'#'//input[@data-qa="signup-email"]'
     signup_button = '//button[@data-qa="signup-button"]'
     signup_page_text = '//*[text()="Enter Account Information"]'
     
@@ -32,5 +32,6 @@ class SignupPage(BasePage):
 
     subscription = '//h2[contains(text(),"Subscription")]'
     fuuter_text = '//p[text()="Get the most recent updates from "]'
-    input_email = '//input[@id="susbscribe_email"]'
+    # input_email = '//input[@id="susbscribe_email"]'
+    susbscribe_email = '//input[@id="susbscribe_email"]'
     
