@@ -7,7 +7,7 @@ class SignupPage(BasePage):
         super().__init__(driver)
     
     input_name = '//input[@data-qa="signup-name"]'
-    input_email = '//*[@id="form"]/div/div/div[3]/div/form/input[3]'#'//input[@data-qa="signup-email"]'
+    input_email = '//*[@id="form"]/div/div/div[3]/div/form/input[3]'
     signup_button = '//button[@data-qa="signup-button"]'
     signup_page_text = '//*[text()="Enter Account Information"]'
     
