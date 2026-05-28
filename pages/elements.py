@@ -66,6 +66,16 @@ class WebElement():
 
         element = self.find(timeout=0.1)
         return element is not None
+    
+    def is_displayed(self):
+        """ Check is the element visible or not. """
+
+        element = self.find(timeout=1)
+
+        if element:
+            return element.is_displayed()
+
+        return False
 
     def is_visible(self):
         """ Check is the element visible or not. """
