@@ -32,12 +32,12 @@ def chrome(debug=False):
 def driver():
     _driver = chrome(True)
     _driver.maximize_window()
-    # _driver.get(HomePage.URL)
     yield _driver
     _driver.quit()
 
 @pytest.fixture
 def home_page(driver):
+    driver.get(HomePage.URL)
     return HomePage(driver)
 
 
@@ -53,12 +53,11 @@ def login_page(driver):
     time.sleep(5)
     return LoginPage(driver)
 
-
-@pytest.fixture(autouse=True)
-def close_cookies_popup(driver):
-    try:
-        button = driver.find_element(By.XPATH, "//button[@aria-label='Consent']")
-        if button.is_displayed() and button.is_enabled():
-            button.click()
-    except Exception:
-        pass
+# @pytest.fixture(autouse=True)
+# def close_cookies_popup(driver):
+#     try:
+#         button = driver.find_element(By.XPATH, "//button[@aria-label='Consent']")
+#         if button.is_displayed() and button.is_enabled():
+#             button.click()
+#     except Exception:
+#         pass

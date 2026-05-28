@@ -1,10 +1,12 @@
+from pages.home_page import HomePage
+from pages.signup_in_page import SignupPage
 
-def test_homepage_menu(home_page):
+def test_homepage_menu(home_page: HomePage):
     element = home_page.item.menu_home
     assert element.is_visible(), f"Not found: {element._locator}"
 
 
-def test_signup_draft(signup_page):
+def test_signup_draft(signup_page: SignupPage):
     usename_field = signup_page.item.input_name
     email_field = signup_page.item.input_email
     button = signup_page.item.signup_button
@@ -15,7 +17,7 @@ def test_signup_draft(signup_page):
     assert signup_text.get_text() == "ENTER ACCOUNT INFORMATION"
 
 
-def test_signup_wo_name(signup_page):
+def test_signup_wo_name(signup_page: SignupPage):
     usename_field = signup_page.item.input_name
     email_field = signup_page.item.input_email
     button = signup_page.item.signup_button
@@ -26,7 +28,7 @@ def test_signup_wo_name(signup_page):
     assert signup_text.is_presented() == False
 
 
-def test_signup_wo_email(signup_page):
+def test_signup_wo_email(signup_page: SignupPage):
     usename_field = signup_page.item.input_name
     email_field = signup_page.item.input_email
     button = signup_page.item.signup_button

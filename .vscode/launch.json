@@ -15,7 +15,7 @@
             "args": [
                 "-v", "-s",
                 "${file}",
-                "-k login_data_incorrect"
+                //"-k login_data_incorrect"
                ],
             "purpose": ["debug-test"]
         },
