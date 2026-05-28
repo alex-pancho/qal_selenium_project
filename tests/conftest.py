@@ -32,7 +32,7 @@ def chrome(debug=False):
 def driver():
     _driver = chrome(True)
     _driver.maximize_window()
-    _driver.get(HomePage.URL)
+    # _driver.get(HomePage.URL)
     yield _driver
     _driver.quit()
 
@@ -62,4 +62,3 @@ def close_cookies_popup(driver):
             button.click()
     except Exception:
         pass
-      

@@ -8,10 +8,10 @@ class LoginPage(BasePage):
         super().__init__(driver)
         self.driver = driver
         
-    input_email_locator ="//input[@data-qa='login-email']"
+    input_email_locator = "//input[@data-qa='login-email']"
     input_password_locator = "//input[@data-qa='login-password']"
     login_button_locator =  "//button[@data-qa='login-button']"
-    error_message_locator = "//p[text()='Your email or password is incorrect!']"
+    error_message_locator = "//p[contains(text(), 'Your email or password is incorrect!')]"
     logout_button_locator = "//a[contains(text(), 'Logout')]"
         
     login_page_url = BasePage.URL + "/login"
@@ -28,11 +28,11 @@ class LoginPage(BasePage):
         self.item.login_button_locator.click()
 
     def is_error_message_presented(self):
-        return self.item.error_message_locator.is_displayed()
+        return self.item.error_message_locator.is_visible()
 
     def is_still_on_login_page(self):
         return self.driver.current_url == self.login_page_url
 
     def is_logout_button_presented(self):
-        return self.item.logout_button_locator.is_displayed()
+        return self.item.logout_button_locator.is_visible()
     

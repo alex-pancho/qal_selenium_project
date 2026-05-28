@@ -6,7 +6,7 @@
     "configurations": [
 
         {
-            "name": "PyTest Debugger",
+            "name": "pyTEST Debugger",
             "type": "debugpy",
             "request": "launch",
             "console": "integratedTerminal",
@@ -15,7 +15,7 @@
             "args": [
                 "-v", "-s",
                 "${file}",
-                //"-k name or email"
+                "-k login_data_incorrect"
                ],
             "purpose": ["debug-test"]
         },
